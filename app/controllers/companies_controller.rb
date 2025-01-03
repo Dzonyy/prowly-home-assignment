@@ -10,6 +10,10 @@ class CompaniesController < ApplicationController
 
   def create_from_csv
     return unless params[:file]
+
+    result = Companies::CreateFromCsvService.call(file: params[:file])
+
+    if result
   end
 
   private
