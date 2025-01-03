@@ -13,7 +13,11 @@ class CompaniesController < ApplicationController
 
     result = Companies::CreateFromCsvService.call(file: params[:file])
 
-    if result
+    if result[:success]
+      render json: result[:companies], status: :created
+    else
+      render json: result[:errors], status: :unprocessable_entity
+    end
   end
 
   private
